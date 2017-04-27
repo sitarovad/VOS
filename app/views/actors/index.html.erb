@@ -1,0 +1,14 @@
+<% provide(:title, 'Actors') %>
+<h1>Actors</h1>
+
+<li><%= link_to "Add actor", new_actor_path, class: 'btn btn-primary' %></li>
+
+<%= will_paginate %>
+
+<ul class="actors">
+  <% @actors.each do |actor| %>
+      <li><%= link_to actor.name, actor %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>
