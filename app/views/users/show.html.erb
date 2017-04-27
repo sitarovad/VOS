@@ -6,6 +6,8 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <p>Email: <%= @user.login%>
+      <div>Signed up: <%= @user.created_at%></p>
     </section>
   </aside>
 </div>
