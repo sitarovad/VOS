@@ -1,0 +1,12 @@
+<% provide(:title, @director.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="director_info">
+      <h1>
+        <%= @director.name %>
+      </h1>
+      <p>Date of birth: <%= @director.date_of_birth%></p>
+      <p>Biography: <%= @director.biography%> </p>
+    </section>
+  </aside>
+</div>

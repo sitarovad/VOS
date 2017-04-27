@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :users
   resources :actors, only: [:new, :index, :create, :show]
+  resources :directors, only: [:new, :index, :create, :show]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,14 @@
+<% provide(:title, 'Directors') %>
+<h1>Actors</h1>
+
+<li><%= link_to "Add director", new_director_path, class: 'btn btn-primary' %></li>
+
+<%= will_paginate %>
+
+<ul class="directors">
+  <% @directors.each do |director| %>
+      <li><%= link_to director.name, director %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

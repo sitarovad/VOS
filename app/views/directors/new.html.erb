@@ -1,0 +1,21 @@
+<% provide(:title, 'New Director') %>
+<h1>New Director</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(:director, url: directors_path) do |f| %>
+
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+
+        <%= f.label :date_of_birth %>
+        <%= f.date_field :date_of_birth, class: 'form-control' %>
+
+        <%= f.label :biography %>
+        <%= f.text_area :biography, :rows => "5", class: 'form-control' %>
+
+        <%= f.submit "Add new director", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
