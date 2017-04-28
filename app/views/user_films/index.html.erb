@@ -1,0 +1,12 @@
+<% provide(:title, 'My films') %>
+<h1>My films</h1>
+
+<%= will_paginate %>
+
+<ul class="user_films">
+  <% @user_films.each do |user| %>
+      <%= render @users %>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

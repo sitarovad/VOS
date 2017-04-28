@@ -12,7 +12,10 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  resources :users
+  resources :users do
+    resources :user_films, only: [:new, :index, :create, :show]
+  end
+
   resources :actors, only: [:new, :index, :create, :show]
   resources :directors, only: [:new, :index, :create, :show]
   resources :films

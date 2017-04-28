@@ -1,0 +1,19 @@
+<% provide(:title, 'Add to my films') %>
+<h1>Add to my films</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_tag user_user_films_path(current_user) do %>
+
+        <%= hidden_field_tag :film_id, params[:film_id] %>
+
+        <%= label_tag :seen_at %>
+        <%= date_field_tag :seen_at, class: 'form-control' %>
+
+        <%= label_tag :rating %>
+        <%= number_field_tag :rating, class: 'form-control' %>
+
+        <%= submit_tag "Add to my films", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
