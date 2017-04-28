@@ -1,0 +1,14 @@
+<% provide(:title, 'Films') %>
+<h1>Films</h1>
+
+<li><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %></li>
+
+<%= will_paginate %>
+
+<ul class="films">
+  <% @films.each do |film| %>
+      <li><%= link_to film.name, film %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

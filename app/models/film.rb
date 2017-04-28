@@ -1,3 +1,4 @@
 class Film < ApplicationRecord
-  #has_many :user_films, :film_genres, :film_genres, :hfdz
+  has_many :user_films
+  has_many :film_genres
 end

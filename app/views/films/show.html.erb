@@ -1,0 +1,18 @@
+<% provide(:title, @film.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="film_info">
+      <h1>
+        <%= @film.name %>
+      </h1>
+      <p>Created at: <%= @film.created_at%></p>
+      <p>Length: <%= @film.length%> </p>
+      <p>Rating: <%= @film.rating%> </p>
+      <p>Content: <%= @film.content%> </p>
+      <p>Genres:</p>
+        <% @film.film_genres.each do |g| %>
+          <%= g.genre.label %> /
+      <% end %>
+    </section>
+  </aside>
+</div>

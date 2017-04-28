@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :users
   resources :actors, only: [:new, :index, :create, :show]
   resources :directors, only: [:new, :index, :create, :show]
+  resources :films
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
