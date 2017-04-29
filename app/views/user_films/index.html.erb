@@ -4,8 +4,8 @@
 <%= will_paginate %>
 
 <ul class="user_films">
-  <% @user_films.each do |user| %>
-      <%= render @users %>
+  <% @user_films.each do |user_film| %>
+    <li><%= link_to user_film.film.name,  user_user_film_path(current_user, user_film) %></li>
   <% end %>
 </ul>
 

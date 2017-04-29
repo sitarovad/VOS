@@ -1,0 +1,19 @@
+<% provide(:title, 'Genres') %>
+<h1>Genres</h1>
+
+<ul class="film_genres">
+  <table>
+    <thead>
+    <th>Genre</th>
+    <th>Count</th>
+    </thead>
+    <tbody>
+  <% @film_genres.each do |genre, number| %>
+     <tr>
+       <td><%= link_to genre, genres_index_path(genre: genre) %></td>
+       <td><%= number %></td>
+     </tr>
+  <% end %>
+    </tbody>
+  </table>
+</ul>

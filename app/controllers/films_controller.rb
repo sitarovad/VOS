@@ -24,6 +24,15 @@ class FilmsController < ApplicationController
     @films = Film.paginate(page: params[:page])
   end
 
+  def genres
+    @film_genres = FilmGenre.joins(:genre).group(:label).count(:film_id)
+    puts @film_genres.to_s
+  end
+
+  def genres_index
+    @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
+  end
+
   private
 
   def films_params

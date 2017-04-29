@@ -1,7 +1,9 @@
 <% provide(:title, 'Films') %>
 <h1>Films</h1>
 
-<li><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %></li>
+<li><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %>
+  <%= link_to "Genres", genres_path, class: 'btn btn-primary' %>
+</li>
 
 <%= will_paginate %>
 
