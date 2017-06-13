@@ -25,11 +25,17 @@ class FilmsController < ApplicationController
   end
 
   def genres
+    #SELECT label, count(fg.film_id) FROM genres g
+    #JOIN film_genres fg ON fg.genre_id = g.id
+    #GROUP BY g.label
     @film_genres = FilmGenre.joins(:genre).group(:label).count(:film_id)
-    puts @film_genres.to_s
   end
 
   def genres_index
+    #SELECT f.name, f.id FROM films f
+    #JOIN film_genres fg ON fg.film_id = f.id
+    #WHERE fg.genre_id = ( SELECT g.id FROM genres g
+    #                       WHERE label = :genre)
     @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
   end
 
