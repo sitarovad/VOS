@@ -8,12 +8,28 @@
       <p>Created at: <%= @film.created_at%></p>
       <p>Length: <%= @film.length%> </p>
       <p>Rating: <%= @film.rating%> </p>
+      <p>Countries:
+        <% @film.film_countries.each do |c| %>
+          <%= c.country.name %> /
+        <% end %>
+      </p>
+      <p>Actors:
+        <% @film.film_actors.each do |a| %>
+            <%= link_to a.actor.name, actor_url(a.actor_id) %>,
+        <% end %>
+      </p>
+      <p>Directors:
+        <% @film.film_directors.each do |d| %>
+            <%= link_to d.director.name, director_url(d.director_id) %>,
+        <% end %>
+      </p>
       <p>Content: <%= @film.content%> </p>
-      <p>Genres:</p>
+      <p>Genres:
         <% @film.film_genres.each do |g| %>
           <%= g.genre.label %> /
       <% end %>
-      <br>
+      </p>
+
       <p> <% if logged_in? %>
           <%= link_to "Add to my films", new_user_user_film_url(current_user, film_id: @film.id), class: "btn btn-lg btn-primary" %>
       <% end %>

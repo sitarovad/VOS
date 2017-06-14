@@ -7,6 +7,10 @@
       </h1>
       <p>Date of birth: <%= @actor.date_of_birth%></p>
       <p>Biography: <%= @actor.biography%> </p>
+      <p>Films:</p>
+        <% @actor.film_actors.each do |f|%>
+            <p><%= link_to f.film.name, film_url(f.film_id) %></p>
+      <% end %>
     </section>
   </aside>
 </div>
