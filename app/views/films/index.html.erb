@@ -1,9 +1,15 @@
 <% provide(:title, 'Films') %>
 <h1>Films</h1>
 
-<li><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %>
+<p><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %>
   <%= link_to "Genres", genres_path, class: 'btn btn-primary' %>
-</li>
+</p>
+
+<p><%= form_tag films_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</p>
 
 <%= will_paginate %>
 

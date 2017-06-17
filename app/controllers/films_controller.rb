@@ -21,7 +21,7 @@ class FilmsController < ApplicationController
   end
 
   def index
-    @films = Film.paginate(page: params[:page])
+    @films = Film.search(params[:search], params[:id]).paginate(page: params[:page])
   end
 
   def genres
