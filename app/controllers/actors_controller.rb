@@ -8,7 +8,7 @@ class ActorsController < ApplicationController
   end
 
   def index
-    @actors = Actor.paginate(page: params[:page])
+    @actors = Actor.search(params[:search], params[:id]).paginate(page: params[:page])
   end
 
   def edit

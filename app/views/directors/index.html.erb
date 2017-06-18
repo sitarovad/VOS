@@ -1,7 +1,13 @@
 <% provide(:title, 'Directors') %>
 <h1>Directors</h1>
 
-<li><%= link_to "Add director", new_director_path, class: 'btn btn-primary' %></li>
+<p><%= link_to "Add director", new_director_path, class: 'btn btn-primary' %></p>
+
+<p><%= form_tag directors_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
+</p>
 
 <%= will_paginate %>
 

@@ -4,7 +4,7 @@ class DirectorsController < ApplicationController
   end
 
   def index
-    @directors = Director.paginate(page: params[:page])
+    @directors = Director.search(params[:search], params[:id]).paginate(page: params[:page])
   end
 
   def create
