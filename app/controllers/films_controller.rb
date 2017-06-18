@@ -10,10 +10,16 @@ class FilmsController < ApplicationController
     genres = genres_params[:genre_id]
     genres.shift
 
+    actors = actors_params[:actor_id]
+    actors.shift
+
     Film.transaction do
       film = Film.where(films_params).first_or_create(films_params)
       genres.each do |genre|
         film.film_genres.where(genre_id: genre).first_or_create(genre_id: genre)
+      end
+      actors.each do |actor|
+        film.film_actors.where(actor_id: actor).first_or_create(actor_id: actor)
       end
       flash[:success] = "Heureka!"
     end
@@ -49,5 +55,10 @@ class FilmsController < ApplicationController
   def genres_params
     params[:FilmGenre][:genre_id] ||= []
     params.require(:FilmGenre).permit(genre_id: [])
+  end
+
+  def actors_params
+    params[:FilmActor][:actor_id] ||= []
+    params.require(:FilmActor).permit(actor_id: [])
   end
 end

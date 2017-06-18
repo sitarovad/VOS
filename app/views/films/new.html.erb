@@ -19,11 +19,14 @@
 
         <%= collection_check_boxes(:FilmGenre, :genre_id, Genre.all, :id, :label) %>
 
+        <%= f.label :actor_ids, "Actors" %>
+        <%= f.collection_select :actor_ids, Actor.order(:name), :id, :name, {}, {multiple: true} %>
+
         <br>
         <%= f.label :content %>
         <%= f.text_area :content, :rows => "10", class: 'form-control' %>
 
-        <%= f.submit "Add new actor", class: "btn btn-primary" %>
+        <%= f.submit "Add new film", class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
