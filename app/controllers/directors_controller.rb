@@ -10,10 +10,10 @@ class DirectorsController < ApplicationController
   def create
     @director = Director.new(director_params)
     if @director.save
-      flash[:success] = "Added new director"
+      flash[:success] = "New director was added successfully!"
       redirect_to directors_path
     else
-      flash[:danger] = "Fail!"
+      flash[:danger] = "Fail, try it again!"
       render 'new'
     end
   end

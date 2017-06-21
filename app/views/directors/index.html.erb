@@ -1,7 +1,9 @@
 <% provide(:title, 'Directors') %>
 <h1>Directors</h1>
 
-<p><%= link_to "Add director", new_director_path, class: 'btn btn-primary' %></p>
+<p><% if current_user.admin? %>
+    <%= link_to "Add director", new_director_path, class: 'btn btn-primary' %>
+  <% end %></p>
 
 <p><%= form_tag directors_path, :method => 'get' do %>
       <%= text_field_tag :search, params[:search] %>

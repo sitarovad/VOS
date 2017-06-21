@@ -18,10 +18,10 @@ class ActorsController < ApplicationController
   def create
     @actor = Actor.new(actor_params)
     if @actor.save
-      flash[:success] = "Added new actor"
+      flash[:success] = "New actor was added succesfully!"
       redirect_to actors_path
     else
-      flash[:danger] = "Fail!"
+      flash[:danger] = "Fail, try it again!"
       render 'new'
     end
   end

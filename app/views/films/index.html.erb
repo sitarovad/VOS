@@ -1,7 +1,10 @@
 <% provide(:title, 'Films') %>
 <h1>Films</h1>
 
-<p><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %>
+<p>
+  <% if current_user.admin? %>
+    <%= link_to "Add film", new_film_path, class: 'btn btn-primary' %>
+  <% end %>
   <%= link_to "Genres", genres_path, class: 'btn btn-primary' %>
 </p>
 
