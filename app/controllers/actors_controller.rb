@@ -4,7 +4,8 @@ class ActorsController < ApplicationController
   end
 
   def show
-    @actor = Actor.find(params[:id])
+    # @actor = Actor.find(params[:id])
+    @actor = Tmdb::Person.detail(params[:id])
   end
 
   def index

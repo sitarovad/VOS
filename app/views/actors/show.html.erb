@@ -1,16 +1,17 @@
 <% provide(:title, @actor.name) %>
 <div class="row">
-  <aside class="col-md-4">
     <section class="actor_info">
       <h1>
         <%= @actor.name %>
       </h1>
-      <p>Date of birth: <%= @actor.date_of_birth%></p>
+      <p>Date of birth: <%= @actor.birthday%></p>
       <p>Biography: <%= @actor.biography%> </p>
       <p>Films:</p>
-        <% @actor.film_actors.each do |f|%>
-            <p><%= link_to f.film.name, film_url(f.film_id) %></p>
+      <% @films = Tmdb::Person.movie_credits(@actor.id).cast %>
+
+      <% @films.each do |f| %>
+          <p><%= link_to f.title, film_path(:id => f.id) %></p>
       <% end %>
+
     </section>
-  </aside>
 </div>

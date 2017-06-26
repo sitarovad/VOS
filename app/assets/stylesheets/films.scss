@@ -1,3 +1,30 @@
 // Place all the styles related to the Films controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#film_genre_ids{
+
+
+}
+
+.search-choice{
+  width: 200px;
+  margin-right: 0px !important;
+}
+
+.search-field, .search-choice{
+  list-style-type: none;
+  margin-top: 5px !important;
+}
+
+.search-field > input{
+  border: none;
+}
+
+.search-field > input:focus{
+  outline: none;
+}
+
+.chosen-container{
+  width: 552px;
+}

@@ -1,12 +1,24 @@
 <% provide(:title, 'Films') %>
 <h1>Films</h1>
 
-<p>
-  <% if current_user.admin? %>
-    <%= link_to "Add film", new_film_path, class: 'btn btn-primary' %>
+
+  <% if logged_in? %>
+      <% if current_user.admin? %>
+        <p><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %></p>
+    <% end %>
+    <p><%= form_tag films_path, :method => 'get' do %>
+          <%= select_tag :genre, options_from_collection_for_select(Genre.all, :id, :label) %>
+          <%= submit_tag "I wish a film!", :name => nil %>
+      <% end %>
+    </p>
+      <p>
+        <%= collection_select :genre, :id, Genre.order(:label), :id, :label, {include_blank: true} %>
+        <%= link_to "I wish a film!", recommendation_path, class: 'btn btn-primary' %>
+      </p>
   <% end %>
+
   <%= link_to "Genres", genres_path, class: 'btn btn-primary' %>
-</p>
+
 
 <p><%= form_tag films_path, :method => 'get' do %>
       <%= text_field_tag :search, params[:search] %>
@@ -14,12 +26,9 @@
   <% end %>
 </p>
 
-<%= will_paginate %>
 
 <ul class="films">
   <% @films.each do |film| %>
-      <li><%= link_to film.name, film %></li>
+      <li><%= link_to film.title, film_path(:id => film.id) %></li>
   <% end %>
 </ul>
-
-<%= will_paginate %>

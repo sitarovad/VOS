@@ -4,6 +4,7 @@ class Film < ApplicationRecord
   has_many :film_actors
   has_many :film_directors
   has_many :film_countries
+  has_many :genres, through: :film_genres
 
   def self.search(search, id)
     if search

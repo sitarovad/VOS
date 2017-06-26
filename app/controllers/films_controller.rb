@@ -1,13 +1,16 @@
 class FilmsController < ApplicationController
+
   def new
   end
 
   def show
-    @film = Film.find(params[:id])
+    # @film = Film.find(params[:id])
+
+    @film = Tmdb::Movie.detail(params[:id])
   end
 
   def create
-    genres = genres_params[:genre_id]
+    genres = genres_params[:genre_ids]
     genres.shift
 
     Film.transaction do
@@ -22,7 +25,8 @@ class FilmsController < ApplicationController
   end
 
   def index
-    @films = Film.search(params[:search], params[:id]).paginate(page: params[:page])
+    # @films = Film.search(params[:search], params[:id]).paginate(page: params[:page])
+    @films = Tmdb::Movie.popular.results
   end
 
   def genres
@@ -40,6 +44,11 @@ class FilmsController < ApplicationController
     @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
   end
 
+  def recommend
+    @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
+
+  end
+
   private
 
   def films_params
@@ -48,8 +57,7 @@ class FilmsController < ApplicationController
 
 
   def genres_params
-    params[:FilmGenre][:genre_id] ||= []
-    params.require(:FilmGenre).permit(genre_id: [])
+    params.require(:film).permit(genre_ids: [])
   end
 
 end

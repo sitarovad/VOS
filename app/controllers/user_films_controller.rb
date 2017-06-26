@@ -13,7 +13,7 @@ class UserFilmsController < ApplicationController
   end
 
   def index
-    @user_films = UserFilm.where(user_id: session[:user_id]).joins(:film).paginate(page: params[:page])
+    @user_films = UserFilm.where(user_id: session[:user_id]).paginate(page: params[:page])
 
   end
 

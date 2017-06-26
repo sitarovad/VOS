@@ -1,6 +1,7 @@
 class DirectorsController < ApplicationController
   def show
-    @director = Director.find(params[:id])
+    # @director = Director.find(params[:id])
+    @director = Tmdb::Person.detail(params[:id])
   end
 
   def index

@@ -17,8 +17,8 @@
         <%= f.label :rating %>
         <%= f.number_field :rating, class: 'form-control' %>
 
-        <%= f.label :FilmGenre, "Genres" %>
-        <%= collection_check_boxes(:FilmGenre, :genre_id, Genre.all, :id, :label) %>
+        <%= f.label :genre_ids, "Genres" %>
+        <%= f.collection_select :genre_ids, Genre.all, :id, :label, {}, {multiple: true} %>
 
         <%= f.label :content %>
         <%= f.text_area :content, :rows => "10", class: 'form-control' %>

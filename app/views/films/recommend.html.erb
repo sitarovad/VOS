@@ -1,0 +1,12 @@
+<% provide(:title, 'Recommendation') %>
+<h1>Recommendation</h1>
+
+<p>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
+
+<%= will_paginate @film_genres%>
+
+<ul class="film_genres">
+  <% @film_genres.each do |film_genre| %>
+      <li><%= link_to film_genre.film.name, film_genre.film %></li>
+  <% end %>
+</ul>
