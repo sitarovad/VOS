@@ -26,9 +26,33 @@
   <% end %>
 </p>
 
+<h2>Popular films</h2>
+
+<% previous_page = params[:page].to_i %>
+<% previous_page -= 1 %>
+
+<% next_page = params[:page].to_i %>
+<% next_page += 1 %>
 
 <ul class="films">
-  <% @films.each do |film| %>
+  <% if previous_page != 0 %>
+      <%= link_to "Previous", films_path(:page => previous_page), class: 'previous' %>
+  <% end %>
+  <% if next_page < @films.total_pages.to_i %>
+      <%= link_to "Next", films_path(:page => next_page), class: 'next' %>
+  <% end %>
+
+  <% @films.results.each do |film| %>
       <li><%= link_to film.title, film_path(:id => film.id) %></li>
   <% end %>
+
+  <% if previous_page != 0 %>
+      <%= link_to "Previous", films_path(:page => previous_page), class: 'previous' %>
+  <% end %>
+  <% if next_page < @films.total_pages.to_i %>
+      <%= link_to "Next", films_path(:page => next_page), class: 'next' %>
+  <% end %>
 </ul>
+
+
+

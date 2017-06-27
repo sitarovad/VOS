@@ -11,8 +11,9 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
-  get '/help', to: 'static_pages#help', as: 'helf'
   get '/about', to: 'static_pages#about'
+  get '/people', to: 'static_pages#people'
+  get '/person', to: 'static_pages#person'
 
   root 'static_pages#home'
 

@@ -5,28 +5,12 @@ class FilmsController < ApplicationController
 
   def show
     # @film = Film.find(params[:id])
-
     @film = Tmdb::Movie.detail(params[:id])
-  end
-
-  def create
-    genres = genres_params[:genre_ids]
-    genres.shift
-
-    Film.transaction do
-      film = Film.where(films_params).first_or_create(films_params)
-      genres.each do |genre|
-        film.film_genres.where(genre_id: genre).first_or_create(genre_id: genre)
-      end
-      flash[:success] = "New film was added successfully!"
-      redirect_to films_path
-    end
-
   end
 
   def index
     # @films = Film.search(params[:search], params[:id]).paginate(page: params[:page])
-    @films = Tmdb::Movie.popular.results
+    @films = Tmdb::Movie.popular(page: params[:page])
   end
 
   def genres
@@ -44,20 +28,30 @@ class FilmsController < ApplicationController
     @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
   end
 
-  def recommend
-    @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
+  #def create
+  #genres = genres_params[:genre_ids]
+  #genres.shift
 
-  end
+  #Film.transaction do
+  #film = Film.where(films_params).first_or_create(films_params)
+  #genres.each do |genre|
+  #film.film_genres.where(genre_id: genre).first_or_create(genre_id: genre)
+  #end
+  #flash[:success] = "New film was added successfully!"
+  #redirect_to films_path
+  #end
 
-  private
+  #end
 
-  def films_params
-    params.require(:film).permit(:name, :created_at, :length, :rating, :content)
-  end
+  #private
+
+  #def films_params
+    #params.require(:film).permit(:name, :created_at, :length, :rating, :content)
+  #end
 
 
-  def genres_params
-    params.require(:film).permit(genre_ids: [])
-  end
+  #def genres_params
+    #params.require(:film).permit(genre_ids: [])
+  #end
 
 end

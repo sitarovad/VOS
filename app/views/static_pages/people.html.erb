@@ -1,0 +1,30 @@
+<% provide(:title, 'People') %>
+<h1>People</h1>
+
+<h2>Popular people</h2>
+
+<% previous_page = params[:page].to_i %>
+<% previous_page -= 1 %>
+
+<% next_page = params[:page].to_i %>
+<% next_page += 1 %>
+
+<ul class="people">
+  <% if previous_page != 0 %>
+      <%= link_to "Previous", people_path(:page => previous_page), class: 'previous' %>
+  <% end %>
+  <% if next_page < @people.total_pages.to_i %>
+      <%= link_to "Next", people_path(:page => next_page), class: 'next' %>
+  <% end %>
+
+  <% @people.results.each do |person| %>
+      <li><%= link_to person.name, person_path(:id => person.id) %></li>
+  <% end %>
+
+  <% if previous_page != 0 %>
+      <%= link_to "Previous", people_path(:page => previous_page), class: 'previous' %>
+  <% end %>
+  <% if next_page < @people.total_pages.to_i %>
+      <%= link_to "Next", people_path(:page => next_page), class: 'next' %>
+  <% end %>
+</ul>

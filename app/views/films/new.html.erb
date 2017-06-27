@@ -1,29 +1,32 @@
 <% provide(:title, 'New Film') %>
 <h1>New Film</h1>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:film, url: films_path) do |f| %>
+<p>If you want to add a new film, you should visit <a href="https://www.themoviedb.org/movie/new"><em>The movie database</em></a>.</p>
 
-        <%= f.label :name %>
-        <%= f.text_field :name, class: 'form-control' %>
+<!--<div class="row">
+  <div class="col-md-6 col-md-offset-3">-->
+    <%#= form_for(:film, url: films_path) do |f| %>
 
-        <%= f.label :created_at %>
-        <%= f.date_field :created_at, class: 'form-control' %>
+        <%#= f.label :name %>
+        <%#= f.text_field :name, class: 'form-control' %>
 
-        <%= f.label :length %>
-        <%= f.number_field :length, class: 'form-control' %>
+        <%#= f.label :created_at %>
+        <%#= f.date_field :created_at, class: 'form-control' %>
 
-        <%= f.label :rating %>
-        <%= f.number_field :rating, class: 'form-control' %>
+        <%#= f.label :length %>
+        <%#= f.number_field :length, class: 'form-control' %>
 
-        <%= f.label :genre_ids, "Genres" %>
-        <%= f.collection_select :genre_ids, Genre.all, :id, :label, {}, {multiple: true} %>
+        <%#= f.label :rating %>
+        <%#= f.number_field :rating, class: 'form-control' %>
 
-        <%= f.label :content %>
-        <%= f.text_area :content, :rows => "10", class: 'form-control' %>
+        <%#= f.label :genre_ids, "Genres" %>
+        <%#= f.collection_select :genre_ids, Genre.all, :id, :label, {}, {multiple: true} %>
 
-        <%= f.submit "Add new film", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
+        <%#= f.label :content %>
+        <%#= f.text_area :content, :rows => "10", class: 'form-control' %>
+
+        <%#= f.submit "Add new film", class: "btn btn-primary" %>
+    <%# end %>
+  <!--</div>
+</div>-->
+
