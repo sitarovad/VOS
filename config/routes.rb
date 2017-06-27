@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/genres', to: 'films#genres'
   get '/genres/index', to: 'films#genres_index'
+  get '/films/search', to: 'films#search'
 
   get '/recommendation', to: 'films#recommend'
 

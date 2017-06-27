@@ -1,9 +1,9 @@
-<% provide(:title, @user_film.film.name) %>
+<% provide(:title, Tmdb::Movie.detail(@user_film.film_id).title) %>
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= link_to @user_film.film.name, film_url(@user_film.film_id) %>
+        <%= link_to Tmdb::Movie.detail(@user_film.film_id).title, film_path(@user_film.film_id) %>
       </h1>
       <p>Rating: <%= @user_film.rating %>
       <div>Seen at: <%= @user_film.seen_at %></p>

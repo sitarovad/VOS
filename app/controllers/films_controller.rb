@@ -20,12 +20,18 @@ class FilmsController < ApplicationController
     @film_genres = FilmGenre.joins(:genre).group(:label).count(:film_id)
   end
 
+  def search
+    temp = params[:search]
+    #@films = Tmdb::Search.movie(temp)
+  end
+
   def genres_index
     #SELECT f.name, f.id FROM films f
     #JOIN film_genres fg ON fg.film_id = f.id
     #WHERE fg.genre_id = ( SELECT g.id FROM genres g
     #                       WHERE label = :genre)
-    @film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
+    #@film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
+    @film_genres = Tmdb::Genre.movies(params[:genre_id], page: params[:page])
   end
 
   #def create

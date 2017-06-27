@@ -2,10 +2,8 @@
 <h1><%= params[:genre] %></h1>
 
 
-<%= will_paginate @film_genres%>
-
 <ul class="film_genres">
-  <% @film_genres.each do |film_genre| %>
-      <li><%= link_to film_genre.film.name, film_genre.film %></li>
+  <% @film_genres.results.each do |film| %>
+      <li><%= link_to film.title, film_path(:id => film.id) %></li>
   <% end %>
 </ul>

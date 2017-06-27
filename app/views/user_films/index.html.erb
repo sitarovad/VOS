@@ -1,12 +1,13 @@
 <% provide(:title, 'My films') %>
 <h1>My films</h1>
 
-<%= will_paginate %>
-
 <ul class="user_films">
-  <% @user_films.each do |user_film| %>
-    <li><%= link_to user_film.film.name,  user_user_film_path(current_user, user_film) %></li>
-  <% end %>
-</ul>
+  <%# @user_films.each do |user_film| %>
+    <%#= link_to user_film.film.name,  user_user_film_path(current_user, user_film) %>
+  <%# end %>
 
-<%= will_paginate %>
+
+<% @user_films.each do |user_film| %>
+      <li><%= link_to Tmdb::Movie.detail(user_film.film_id).title, user_user_film_path(current_user, user_film) %></li>
+<% end %>
+</ul>
