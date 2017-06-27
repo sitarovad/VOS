@@ -15,4 +15,9 @@ class StaticPagesController < ApplicationController
   def person
     @person = Tmdb::Person.detail(params[:id])
   end
+
+  def search
+    @people = Tmdb::Search.person(params[:search], page: params[:page])
+    @search = params[:search]
+  end
 end

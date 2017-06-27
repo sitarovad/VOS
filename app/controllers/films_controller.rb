@@ -21,8 +21,14 @@ class FilmsController < ApplicationController
   end
 
   def search
-    temp = params[:search]
-    #@films = Tmdb::Search.movie(temp)
+    if params[:search] and params[:genre].blank?
+      @films = Tmdb::Search.movie(params[:search], page: params[:page])
+      @search = params[:search]
+    elsif params[:genre] and params[:search].blank?
+           redirect_to genres_index_path(genre: params[:genre], page: params[:page])
+    else
+      render 'films/index'
+    end
   end
 
   def genres_index
@@ -31,7 +37,9 @@ class FilmsController < ApplicationController
     #WHERE fg.genre_id = ( SELECT g.id FROM genres g
     #                       WHERE label = :genre)
     #@film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
-    @film_genres = Tmdb::Genre.movies(params[:genre_id], page: params[:page])
+    @film_genres = Tmdb::Genre.movies(params[:genre], page: params[:page])
+    @genres = Tmdb::Genre.movie_list
+    @genre = params[:genre]
   end
 
   #def create

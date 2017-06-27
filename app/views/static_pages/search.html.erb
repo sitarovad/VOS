@@ -6,7 +6,7 @@
       <%= submit_tag "Search", :name => nil %>
   <% end %></p>
 
-<h2>Popular people</h2>
+<h2>Results for '<%= @search %>' </h2>
 
 <% previous_page = params[:page].to_i %>
 <% previous_page -= 1 %>
@@ -16,10 +16,10 @@
 
 <ul class="people">
   <% if previous_page != 0 %>
-      <%= link_to "Previous", people_path(:page => previous_page), class: 'previous' %>
+      <%= link_to "Previous", people_search_path(:search => @search, :page => previous_page), class: 'previous' %>
   <% end %>
   <% if next_page < @people.total_pages.to_i %>
-      <%= link_to "Next", people_path(:page => next_page), class: 'next' %>
+      <%= link_to "Next", people_search_path(:search => @search, :page => next_page), class: 'next' %>
   <% end %>
 
   <% @people.results.each do |person| %>
@@ -27,9 +27,9 @@
   <% end %>
 
   <% if previous_page != 0 %>
-      <%= link_to "Previous", people_path(:page => previous_page), class: 'previous' %>
+      <%= link_to "Previous", people_search_path(:search => @search, :page => previous_page), class: 'previous' %>
   <% end %>
   <% if next_page < @people.total_pages.to_i %>
-      <%= link_to "Next", people_path(:page => next_page), class: 'next' %>
+      <%= link_to "Next", people_search_path(:search => @search, :page => next_page), class: 'next' %>
   <% end %>
 </ul>

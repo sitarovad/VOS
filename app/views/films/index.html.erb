@@ -19,7 +19,11 @@
 
   <%#= link_to "Genres", genres_path, class: 'btn btn-primary' %>
 
-
+<p><%= form_tag films_search_path(:page => 1), :method => 'get' do %>
+      <%= select_tag :genre, options_for_select(Tmdb::Genre.movie_list.map{ |genre| [genre.name, "#{genre.id}"]}, params[:genre]), include_blank: true%>
+      <%= text_field_tag :search %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %></p>
 <p>
   <%#= text_field :search, films_search_path %>
   <%#= link_to "Search", films_search_path %>
