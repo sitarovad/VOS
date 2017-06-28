@@ -29,12 +29,17 @@ class UserFilmsController < ApplicationController
     @films = []
     @hash_films = {}
 
-    if best_films.nil?
+    if best_films.empty?
       flash[:danger] = "We don't have enough data. Please, add some films to your films."
       redirect_to user_user_films_path(current_user)
     else
       best_films.each do |film|
         directors = Tmdb::Movie.director(film.film_id)
+
+        if directors.empty?
+          next
+        end
+
         films_temp = Tmdb::Person.movie_credits(directors[0].id).crew
         films = []
 
