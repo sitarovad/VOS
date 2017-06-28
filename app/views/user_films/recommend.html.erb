@@ -1,0 +1,11 @@
+<% provide(:title, 'Recommendations') %>
+<h1>Recommendations</h1>
+
+
+<ul class="recommendations">
+
+  <% @films.each do |film| %>
+      <li><%= link_to Tmdb::Movie.detail(film).title, film_path(:id => film) %></li>
+  <% end %>
+
+</ul>

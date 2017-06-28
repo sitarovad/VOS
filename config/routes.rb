@@ -3,8 +3,6 @@ Rails.application.routes.draw do
   get '/genres/index', to: 'films#genres_index'
   get '/films/search', to: 'films#search'
 
-  get '/recommendation', to: 'films#recommend'
-
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -16,6 +14,8 @@ Rails.application.routes.draw do
   get '/people', to: 'static_pages#people'
   get '/person', to: 'static_pages#person'
   get '/people/search', to: 'static_pages#search'
+
+  get '/recommendation', to: 'user_films#recommend'
 
   root 'static_pages#home'
 

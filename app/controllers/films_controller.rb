@@ -13,13 +13,6 @@ class FilmsController < ApplicationController
     @films = Tmdb::Movie.popular(page: params[:page])
   end
 
-  def genres
-    #SELECT label, count(fg.film_id) FROM genres g
-    #JOIN film_genres fg ON fg.genre_id = g.id
-    #GROUP BY g.label
-    @film_genres = FilmGenre.joins(:genre).group(:label).count(:film_id)
-  end
-
   def search
     if params[:search] and params[:genre].blank? and not params[:search].blank?
       @films = Tmdb::Search.movie(params[:search], page: params[:page])
@@ -58,6 +51,13 @@ class FilmsController < ApplicationController
   #redirect_to films_path
   #end
 
+  #end
+
+  #def genres
+  #SELECT label, count(fg.film_id) FROM genres g
+  #JOIN film_genres fg ON fg.genre_id = g.id
+  #GROUP BY g.label
+  #@film_genres = FilmGenre.joins(:genre).group(:label).count(:film_id)
   #end
 
   #private

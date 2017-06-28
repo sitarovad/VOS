@@ -22,7 +22,40 @@ class UserFilmsController < ApplicationController
 
   def index
     @user_films = UserFilm.where(user_id: session[:user_id])
+  end
 
+  def recommend
+    best_films = UserFilm.where(user_id: session[:user_id]).order('rating DESC').limit(5)
+    @films = []
+
+    if best_films.nil?
+      flash[:danger] = "We don't have enough data. Please, add some films to your films."
+      redirect_to user_user_films_path(current_user)
+    else
+      best_films.each do |film|
+        directors = Tmdb::Movie.director(film.film_id)
+        films_temp = Tmdb::Person.movie_credits(directors[0].id).crew
+        films = []
+
+        films_temp.each do |t|
+            films.push(t.id)
+        end
+
+        films.uniq!
+        genres = Tmdb::Movie.detail(film.film_id).genres
+
+        films.each do |f|
+            film_genres = Tmdb::Movie.detail(f).genres
+            temp = genres & film_genres
+            if temp.empty?
+              films.delete(f)
+            end
+        end
+
+        films.delete(film.film_id)
+        @films += films
+      end
+    end
   end
 
   private
