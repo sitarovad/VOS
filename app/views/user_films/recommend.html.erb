@@ -5,7 +5,7 @@
 <ul class="recommendations">
 
   <% @films.each do |film| %>
-      <li><%= link_to Tmdb::Movie.detail(film).title, film_path(:id => film) %></li>
+      <li><%= link_to @hash_films[film], film_path(:id => film) %></li>
   <% end %>
 
 </ul>

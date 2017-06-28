@@ -27,6 +27,7 @@ class UserFilmsController < ApplicationController
   def recommend
     best_films = UserFilm.where(user_id: session[:user_id]).order('rating DESC').limit(5)
     @films = []
+    @hash_films = {}
 
     if best_films.nil?
       flash[:danger] = "We don't have enough data. Please, add some films to your films."
@@ -38,18 +39,21 @@ class UserFilmsController < ApplicationController
         films = []
 
         films_temp.each do |t|
-            films.push(t.id)
+          films.push(t.id)
+          if @hash_films[t.id].nil?
+            @hash_films[t.id] = t.title
+          end
         end
 
         films.uniq!
         genres = Tmdb::Movie.detail(film.film_id).genres
 
         films.each do |f|
-            film_genres = Tmdb::Movie.detail(f).genres
-            temp = genres & film_genres
-            if temp.empty?
-              films.delete(f)
-            end
+          film_genres = Tmdb::Movie.detail(f).genres
+          temp = genres & film_genres
+          if temp.empty?
+            films.delete(f)
+          end
         end
 
         films.delete(film.film_id)
