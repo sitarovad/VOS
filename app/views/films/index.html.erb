@@ -6,35 +6,15 @@
       <% if current_user.admin? %>
         <p><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %></p>
     <% end %>
-    <p><%#= form_tag films_path, :method => 'get' do %>
-          <%#= select_tag :genre, options_from_collection_for_select(Genre.all, :id, :label) %>
-          <%#= submit_tag "I wish a film!", :name => nil %>
-      <%# end %>
-    </p>
-      <p>
-        <%#= collection_select :genre, :id, Genre.order(:label), :id, :label, {include_blank: true} %>
-        <%#= link_to "I wish a film!", recommendation_path, class: 'btn btn-primary' %>
-      </p>
   <% end %>
 
-  <%#= link_to "Genres", genres_path, class: 'btn btn-primary' %>
-
 <p><%= form_tag films_search_path(:page => 1), :method => 'get' do %>
+      <%= label_tag :genre, "Choose genre:" %>
       <%= select_tag :genre, options_for_select(Tmdb::Genre.movie_list.map{ |genre| [genre.name, "#{genre.id}"]}, params[:genre]), include_blank: true%>
+      <%= label_tag :search, "Or search for film:" %>
       <%= text_field_tag :search %>
       <%= submit_tag "Search", :name => nil %>
   <% end %></p>
-<p>
-  <%#= text_field :search, films_search_path %>
-  <%#= link_to "Search", films_search_path %>
-</p>
-<p><%#= form_tag films_path, :method => 'get' do %>
-      <%#= text_field_tag :search, params[:search] %>
-      <%#= submit_tag "Search", :name => nil %>
-  <%# end %>
-  <%#= collection_select :genre_id, :id, Tmdb::Genre.movie_list, :id, :name, {include_blank: true} %>
-  <%#= link_to "Search", genres_index_path(params[:genre_id]) %>
-</p>
 
 <h2>Popular films</h2>
 

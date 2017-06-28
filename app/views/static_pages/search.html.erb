@@ -2,6 +2,7 @@
 <h1>People</h1>
 
 <p><%= form_tag people_search_path(:page => 1), :method => 'get' do %>
+      <%= label_tag :search, "Search for a person:" %>
       <%= text_field_tag :search %>
       <%= submit_tag "Search", :name => nil %>
   <% end %></p>
@@ -15,7 +16,7 @@
 <% next_page += 1 %>
 
 <ul class="people">
-  <% if previous_page != 0 %>
+  <% if previous_page > 0 %>
       <%= link_to "Previous", people_search_path(:search => @search, :page => previous_page), class: 'previous' %>
   <% end %>
   <% if next_page < @people.total_pages.to_i %>
@@ -26,7 +27,7 @@
       <li><%= link_to person.name, person_path(:id => person.id) %></li>
   <% end %>
 
-  <% if previous_page != 0 %>
+  <% if previous_page > 0 %>
       <%= link_to "Previous", people_search_path(:search => @search, :page => previous_page), class: 'previous' %>
   <% end %>
   <% if next_page < @people.total_pages.to_i %>

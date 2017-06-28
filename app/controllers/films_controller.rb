@@ -21,13 +21,17 @@ class FilmsController < ApplicationController
   end
 
   def search
-    if params[:search] and params[:genre].blank?
+    if params[:search] and params[:genre].blank? and not params[:search].blank?
       @films = Tmdb::Search.movie(params[:search], page: params[:page])
       @search = params[:search]
-    elsif params[:genre] and params[:search].blank?
-           redirect_to genres_index_path(genre: params[:genre], page: params[:page])
+      @page = params[:page]
+    elsif params[:genre] and params[:search].blank? and not params[:genre].blank?
+      redirect_to genres_index_path(genre: params[:genre], page: params[:page])
     else
-      render 'films/index'
+      if params[:genre] and params[:search] and not params[:search].blank? and not params[:genre].blank?
+        flash[:danger] = "You should fill only one text field!"
+      end
+      redirect_to films_path(:page => 1)
     end
   end
 
@@ -38,7 +42,6 @@ class FilmsController < ApplicationController
     #                       WHERE label = :genre)
     #@film_genres = FilmGenre.joins(:film).joins(:genre).where("genres.label LIKE ?", params[:genre]).paginate(page: params[:page])
     @film_genres = Tmdb::Genre.movies(params[:genre], page: params[:page])
-    @genres = Tmdb::Genre.movie_list
     @genre = params[:genre]
   end
 

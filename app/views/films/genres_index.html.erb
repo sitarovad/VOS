@@ -1,7 +1,6 @@
 <% provide(:title, 'Films') %>
 <h1>Films</h1>
 
-
 <% if logged_in? %>
     <% if current_user.admin? %>
         <p><%= link_to "Add film", new_film_path, class: 'btn btn-primary' %></p>
@@ -9,14 +8,35 @@
 <% end %>
 
 <p><%= form_tag films_search_path(:page => 1), :method => 'get' do %>
+      <%= label_tag :genre, "Choose genre:" %>
       <%= select_tag :genre, options_for_select(Tmdb::Genre.movie_list.map{ |genre| [genre.name, "#{genre.id}"]}, params[:genre]), include_blank: true%>
+      <%= label_tag :search, "Or search for film:" %>
       <%= text_field_tag :search %>
       <%= submit_tag "Search", :name => nil %>
   <% end %></p>
-<p>
+
+<% previous_page = params[:page].to_i %>
+<% previous_page -= 1 %>
+
+<% next_page = params[:page].to_i %>
+<% next_page += 1 %>
 
 <ul class="film_genres">
+  <% if previous_page > 0 %>
+      <%= link_to "Previous", genres_index_path(:genre => @genre, :page => previous_page), class: 'previous' %>
+  <% end %>
+  <% if next_page < @film_genres.total_pages.to_i %>
+      <%= link_to "Next", genres_index_path(:genre => @genre, :page => next_page), class: 'next' %>
+  <% end %>
+
   <% @film_genres.results.each do |film| %>
       <li><%= link_to film.title, film_path(:id => film.id) %></li>
+  <% end %>
+
+  <% if previous_page > 0 %>
+      <%= link_to "Previous", genres_index_path(:genre => @genre, :page => previous_page), class: 'previous' %>
+  <% end %>
+  <% if next_page < @film_genres.total_pages.to_i %>
+      <%= link_to "Next", genres_index_path(:genre => @genre, :page => next_page), class: 'next' %>
   <% end %>
 </ul>
